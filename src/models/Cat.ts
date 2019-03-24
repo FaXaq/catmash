@@ -1,5 +1,5 @@
 export interface ICat {
-  url: string,
-  id: string,
-  versus?: boolean,
+  url: string;
+  id: string;
+  versus?: boolean;
 }
