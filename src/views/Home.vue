@@ -15,7 +15,7 @@
 import { Component, Vue } from 'vue-property-decorator';
 import CatProfile from '@/components/CatProfile.vue';
 import { getCats } from '@/services/api';
-import { ICat } from '@/models/Cat';
+import { ICat, CatModel } from '@/models/Cat';
 
 @Component({
   components: {
@@ -56,7 +56,7 @@ export default class Home extends Vue {
   }
 
   selectWinner(id: string) {
-    // TODO Commit winner
+    CatModel.push(id);
     this.selectVersus();
   }
 
