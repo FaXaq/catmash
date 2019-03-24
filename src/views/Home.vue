@@ -1,8 +1,9 @@
 <template>
   <div class="home">
     <ul>
-      <li v-for="cat in cats" :key="cat.id">{{ cat }}</li>
+      <li v-for="cat in versusCats" :key="cat.id">{{ cat }}</li>
     </ul>
+    <button @click="selectVersus">New Versus</button>
   </div>
 </template>
 
@@ -13,6 +14,52 @@ import { ICat } from '@/models/Cat';
 
 @Component({})
 export default class Home extends Vue {
-  private cats: Array<ICat> = getCats();
+  private cats: ICat[] = getCats();
+
+  get versusCats(): ICat[] {
+    return this.cats.filter((c) => c.versus);
+  }
+
+  getRandomCatIndex(): number {
+    return Math.floor(Math.random() * (this.cats.length));
+  }
+
+  selectVersus() {
+    if (this.cats.length < 2) {
+      alert('Not enough cats to play the catmash !');
+    }
+
+    // clean previous versus
+    this.cleanVersus();
+    
+    // select two random cats index
+    let randomCat1 = this.getRandomCatIndex(),
+        randomCat2 = this.getRandomCatIndex();
+
+    // hack to prevent choosing between the same cat
+    while (randomCat2 == randomCat1) {
+      randomCat2 = this.getRandomCatIndex();
+    }
+    
+    // apply versus prop to them
+    Vue.set(this.cats, randomCat1, Object.assign({}, this.cats[randomCat1], { versus: true }));
+    Vue.set(this.cats, randomCat2, Object.assign({}, this.cats[randomCat2], { versus: true }));
+  }
+
+  selectWinner(id: string) {
+    // TODO Commit winner
+    this.selectVersus();
+  }
+
+  // clean versus state
+  cleanVersus() {
+    this.versusCats.forEach((c) => {
+      Vue.delete(c, 'versus');
+    });
+  }
+
+  created() {
+    this.selectVersus();
+  }
 }
 </script>
