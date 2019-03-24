@@ -1,18 +1,21 @@
 <template>
   <div class="home">
-    <ul>
-      <li v-for="cat in versusCats" :key="cat.id">{{ cat }}</li>
-    </ul>
+    <cat-profile :cat="cat" v-for="cat in versusCats" :key="cat.id" />
     <button @click="selectVersus">New Versus</button>
   </div>
 </template>
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
+import CatProfile from '@/components/CatProfile.vue';
 import { getCats } from '@/services/api';
 import { ICat } from '@/models/Cat';
 
-@Component({})
+@Component({
+  components: {
+    CatProfile,
+  }
+})
 export default class Home extends Vue {
   private cats: ICat[] = getCats();
 
