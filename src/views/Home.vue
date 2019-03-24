@@ -1,7 +1,13 @@
 <template>
   <div class="home">
-    <cat-profile :cat="cat" v-for="cat in versusCats" :key="cat.id" />
-    <button @click="selectVersus">New Versus</button>
+    <div
+      :class="{ pan: true, special: i % 2 === 0 }"
+      v-for="(cat, i) in versusCats"
+      :key="cat.id"
+      @click="selectWinner(cat.id)"
+    >
+      <cat-profile :cat="cat" />
+    </div>
   </div>
 </template>
 
