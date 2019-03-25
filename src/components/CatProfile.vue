@@ -2,6 +2,7 @@
   <div class="cat">
     <img :src="cat.url" :alt="cat.id">
     <p>{{ cat.id }}</p>
+    <p v-if="cat.score !== undefined" class="score">{{ cat.score }}</p>
   </div>
 </template>
 

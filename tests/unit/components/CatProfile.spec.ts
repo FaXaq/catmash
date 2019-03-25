@@ -23,4 +23,17 @@ describe('CatProfile.vue', () => {
     expect(wrapper.find('img').attributes('src')).to.equal(cat.url);
     expect(wrapper.text()).to.include(cat.id);
   });
+
+  it('Should show score when provided', () => {
+    const score = 123141;
+    const newCat = Object.assign({}, cat, { score });
+
+    wrapper = shallowMount(CatProfile, {
+      propsData: {
+        cat: newCat,
+      },
+    });
+
+    expect(wrapper.find('p.score').text()).to.include(score);
+  });
 });
