@@ -1,12 +1,14 @@
 import { expect } from 'chai';
-import { shallowMount, Wrapper } from '@vue/test-utils';
+import { shallowMount, Wrapper, RouterLinkStub } from '@vue/test-utils';
 import Home from '@/views/Home.vue';
 
 describe('Home.vue', () => {
   let wrapper: Wrapper<Home>;
 
   beforeEach(() => {
-    wrapper = shallowMount(Home);
+    wrapper = shallowMount(Home, {
+      stubs: { 'router-link': RouterLinkStub }
+    });
   });
 
   it('Should select two versus cats at start', () => {
