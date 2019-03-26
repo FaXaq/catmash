@@ -34,19 +34,6 @@ export default class Leadboard extends Vue {
     });
   }
 
-  // retrieve cat score from cat it
-  public async catScore(id: string) {
-    const cats = await CatModel.orderByValue().equalTo(id).once('value');
-    return cats.numChildren();
-  }
-
-  // set default score to 0 for all cats
-  public populateCatsScore() {
-    this.cats.forEach((c) => {
-      c.score = 0;
-    });
-  }
-
   // get cat index within cats table
   public findCatIndex(catId: string): number {
     return this.cats.findIndex((cat) => {
@@ -55,17 +42,20 @@ export default class Leadboard extends Vue {
   }
 
   public created() {
-    this.populateCatsScore();
+    // initialize all scores at 0
+    this.cats.forEach((c) => {
+      c.score = 0;
+    });
 
     // retrieve scores from firebase
     CatModel.on('child_added', (v) => {
       const catId = (v as any).val();
       const catIndex = this.findCatIndex(catId);
+      const catScore = this.cats[catIndex].score || 0;
       // get score for this added entry in firebase
-      this.catScore(catId).then((score) => {
-        // set with Vue.set to trigger re-render if needed
-        Vue.set(this.cats, catIndex, Object.assign({}, this.cats[catIndex], { score }));
-      });
+      Vue.set(this.cats,
+        catIndex,
+        Object.assign({}, this.cats[catIndex], { score: catScore + 1 }));
     });
   }
 }
