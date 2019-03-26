@@ -17,10 +17,10 @@ describe('CatProfile.vue', () => {
   });
 
   it('Should create an image and a paragraph with a cat provided', () => {
-    expect(wrapper.contains('img')).to.be.true;
+    expect(wrapper.contains('div.cat-img')).to.be.true;
     expect(wrapper.contains('p')).to.be.true;
     
-    expect(wrapper.find('img').attributes('src')).to.equal(cat.url);
+    expect(wrapper.find('div.cat-img').attributes('style')).to.equal(`background-image: url(${cat.url});`);
     expect(wrapper.text()).to.include(cat.id);
   });
 

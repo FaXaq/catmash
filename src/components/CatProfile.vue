@@ -1,6 +1,7 @@
 <template>
   <div class="cat">
-    <img :src="cat.url" :alt="cat.id">
+    <div class="cat-img" v-bg="cat.url">
+    </div>
     <p>{{ cat.id }}</p>
     <p v-if="cat.score !== undefined" class="score">{{ cat.score }}</p>
   </div>
@@ -9,8 +10,13 @@
 <script lang="ts">
 import { Component, Prop, Vue } from 'vue-property-decorator';
 import { ICat } from '@/models/Cat';
+import { bg } from '@/directives/bg';
 
-@Component({})
+@Component({
+  directives: {
+    bg
+  }
+})
 export default class CatProfile extends Vue {
   @Prop({
     required: true
@@ -20,5 +26,22 @@ export default class CatProfile extends Vue {
 </script>
 
 <style lang="scss" scoped>
+@import "../assets/scss/misc/vars";
 
+.cat {
+  .cat-img {
+    border: .3em solid $light-blue;
+    border-radius: 100%;
+    width: 20vh;
+    height: 20vh;
+    background-size: cover;
+    background-position: center center;
+
+    box-shadow: 0px 4px 20px rgba(0,0,0,0.3);
+  }
+
+  p {
+    padding: $base-unit 0px;
+  }
+}
 </style>
