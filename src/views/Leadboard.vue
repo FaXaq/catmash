@@ -1,7 +1,11 @@
 <template>
-  <div id="leadboard">
-    <cat-profile :cat="cat" v-for="cat in ordredCats" :key="cat.id" />
-    <router-link to="/">Home</router-link>
+  <div class="leadboard">
+    <ul>
+      <li v-for="(cat, c) in ordredCats" :key="cat.id" :class="{ special: c % 2 === 1 }">
+        <cat-profile :cat="cat" />
+      </li>
+    </ul>
+    <router-link to="/" class="nav-link">Home</router-link>
   </div>
 </template>
 
@@ -17,16 +21,23 @@ import { getCats } from '@/services/api';
   }
 })
 export default class Leadboard extends Vue {
-  private cats: Array<ICat> = getCats();
+  private cats: Array<ICat> = [...getCats()];
 
   public async catScore(id: string) {
     let cats = await CatModel.orderByValue().equalTo(id).once('value');
-    return await cats.numChildren() || 0;
+    return cats.numChildren();
+  }
+
+  public populateCatsScore() {
+    this.cats.forEach((c) => {
+      c.score = 0;
+    })
   }
 
   get ordredCats(): ICat[] {
     return this.cats.sort(function(a: ICat, b: ICat) {
-      return a.score || 0
+      if ((a.score || 0) < (b.score || 0)) return 1;
+      return -1;
     });
   }
 
@@ -37,11 +48,7 @@ export default class Leadboard extends Vue {
   }
   
   created() {
-    this.cats.forEach((cat) => {
-      this.catScore(cat.id).then((score) => {
-        cat.score = score;
-      });
-    });
+    this.populateCatsScore();
 
     CatModel.on('child_added', (v) => {
       let catId = (v as any).val();
