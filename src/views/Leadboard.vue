@@ -24,17 +24,7 @@ import { getCats } from '@/services/api';
 export default class Leadboard extends Vue {
   private cats: Array<ICat> = [...getCats()];
 
-  public async catScore(id: string) {
-    let cats = await CatModel.orderByValue().equalTo(id).once('value');
-    return cats.numChildren();
-  }
-
-  public populateCatsScore() {
-    this.cats.forEach((c) => {
-      c.score = 0;
-    })
-  }
-
+  // order cats on sport
   get ordredCats(): ICat[] {
     return this.cats.sort(function(a: ICat, b: ICat) {
       if ((a.score || 0) < (b.score || 0)) return 1;
@@ -42,6 +32,20 @@ export default class Leadboard extends Vue {
     });
   }
 
+  // retrieve cat score from cat it
+  public async catScore(id: string) {
+    let cats = await CatModel.orderByValue().equalTo(id).once('value');
+    return cats.numChildren();
+  }
+
+  // set default score to 0 for all cats
+  public populateCatsScore() {
+    this.cats.forEach((c) => {
+      c.score = 0;
+    })
+  }
+
+  // get cat index within cats table
   public findCatIndex(catId: string): number {
     return this.cats.findIndex((cat) => {
       return cat.id === catId;
@@ -51,6 +55,7 @@ export default class Leadboard extends Vue {
   created() {
     this.populateCatsScore();
 
+    // retrieve scores from firebase
     CatModel.on('child_added', (v) => {
       let catId = (v as any).val();
       let catIndex = this.findCatIndex(catId);

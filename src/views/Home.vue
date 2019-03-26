@@ -27,14 +27,17 @@ import { ICat, CatModel } from '@/models/Cat';
 export default class Home extends Vue {
   private cats: ICat[] = [...getCats()];
 
+  // return cats with versus props
   get versusCats(): ICat[] {
     return this.cats.filter((c) => c.versus);
   }
 
+  // get a random cat index
   getRandomCatIndex(): number {
     return Math.floor(Math.random() * (this.cats.length));
   }
 
+  // select to random cat for a versus
   selectVersus() {
     if (this.cats.length < 2) {
       alert('Not enough cats to play the catmash !');
@@ -57,24 +60,29 @@ export default class Home extends Vue {
     Vue.set(this.cats, randomCat2, Object.assign({}, this.cats[randomCat2], { versus: true }));
   }
 
+  // select winner, add it to firebase and launch a new versus !
   selectWinner(id: string) {
     CatModel.push(id);
     this.selectVersus();
   }
 
-  // clean versus state
+  // clean versus prop on cats
   cleanVersus() {
     this.versusCats.forEach((c) => {
       Vue.delete(c, 'versus');
     });
   }
 
+  // clean scores if needed (when going back from leadboard)
+  // this is pretty ugly
+  // TODO: find a better way
   clearScores() {
     this.cats.forEach((c) => {
       delete c.score;
     })
   }
 
+  // before mounting clear scores & select a new versus between cats
   created() {
     this.clearScores();
     this.selectVersus();
