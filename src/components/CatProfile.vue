@@ -34,6 +34,12 @@ export default class CatProfile extends Vue {
     border-radius: 100%;
     width: 20vh;
     height: 20vh;
+    
+    @media screen and (min-width: $breakpoint-l) {
+      width: 40vh;
+      height: 40vh;
+    }
+
     background-size: cover;
     background-position: center center;
     transition: all 0.3s;
