@@ -1,0 +1,24 @@
+
+#app {
+  .leadboard {
+    .cat {
+      padding: ($base-unit /2) $base-unit;
+      display: flex;
+      align-items: center;
+      .cat-img {
+        border: 0px;
+        width: 2em;
+        height: 2em;
+      }
+      border-bottom: 1px solid $light-blue;
+
+      p {
+        padding: $base-unit;
+      }
+    }
+
+    #logo {
+      zoom: .3;
+    }
+  }
+}

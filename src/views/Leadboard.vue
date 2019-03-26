@@ -1,10 +1,11 @@
 <template>
   <div class="leadboard">
-    <ul>
+    <img id="logo" src="../assets/img/cat.svg" />
+    <transition-group name="flip-list" tag="ul">
       <li v-for="(cat, c) in ordredCats" :key="cat.id" :class="{ special: c % 2 === 1 }">
         <cat-profile :cat="cat" />
       </li>
-    </ul>
+    </transition-group>
     <router-link to="/" class="nav-link">Home</router-link>
   </div>
 </template>

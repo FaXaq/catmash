@@ -1,0 +1,9 @@
+#logo {
+  position: fixed;
+  width: $base-unit * 10;
+
+  top: 0px;
+  left: calc(50% - #{$base-unit * 5});
+
+  fill: blue;
+}

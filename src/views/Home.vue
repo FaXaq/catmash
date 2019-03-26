@@ -1,5 +1,6 @@
 <template>
   <div class="home">
+    <img id="logo" src="../assets/img/cat.svg" />
     <div
       :class="{ pan: true, special: i % 2 === 0 }"
       v-for="(cat, i) in versusCats"
@@ -24,7 +25,7 @@ import { ICat, CatModel } from '@/models/Cat';
   }
 })
 export default class Home extends Vue {
-  private cats: ICat[] = getCats();
+  private cats: ICat[] = [...getCats()];
 
   get versusCats(): ICat[] {
     return this.cats.filter((c) => c.versus);
@@ -68,7 +69,14 @@ export default class Home extends Vue {
     });
   }
 
+  clearScores() {
+    this.cats.forEach((c) => {
+      delete c.score;
+    })
+  }
+
   created() {
+    this.clearScores();
     this.selectVersus();
   }
 }
