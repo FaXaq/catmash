@@ -2,8 +2,8 @@
   <div class="cat">
     <div class="cat-img" v-bg="cat.url">
     </div>
-    <p>{{ cat.id }}</p>
-    <p v-if="cat.score !== undefined" class="score">{{ cat.score }}</p>
+    <p v-if="cat.score !== undefined">{{ cat.id }}</p>
+    <p v-if="cat.score !== undefined" class="score">{{ cat.score }} points</p>
   </div>
 </template>
 

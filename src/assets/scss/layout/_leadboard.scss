@@ -1,6 +1,24 @@
 
 #app {
   .leadboard {
+    #logo {
+      position: absolute;
+    }
+
+    .first {
+      zoom: 1.3;
+    }
+
+    .second {
+      zoom: 1.2;
+    }
+
+    .third {
+      zoom: 1.1;
+    }
+
+    color: $light-blue;
+
     .cat {
       padding: ($base-unit /2) $base-unit;
       display: flex;

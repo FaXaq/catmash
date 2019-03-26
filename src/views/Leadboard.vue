@@ -2,7 +2,10 @@
   <div class="leadboard">
     <img id="logo" src="../assets/img/cat.svg" />
     <transition-group name="flip-list" tag="ul">
-      <li v-for="(cat, c) in ordredCats" :key="cat.id" :class="{ special: c % 2 === 1 }">
+      <li
+        v-for="(cat, c) in ordredCats"
+        :key="cat.id"
+        :class="{ special: c % 2 === 1, first: c === 0, second: c === 1, third: c === 2 }">
         <cat-profile :cat="cat" />
       </li>
     </transition-group>

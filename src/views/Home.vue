@@ -1,6 +1,10 @@
 <template>
   <div class="home">
     <img id="logo" src="../assets/img/cat.svg" />
+    <div class="page-title">
+      <h1>Catmash</h1>
+      <h4>Choose the best cat !</h4>
+    </div>
     <div
       :class="{ pan: true, special: i % 2 === 0 }"
       v-for="(cat, i) in versusCats"
