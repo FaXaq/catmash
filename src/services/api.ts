@@ -402,6 +402,14 @@ const cats = {
       url: 'http://25.media.tumblr.com/tumblr_m3jbdxqnma1qa8o34o1_500.jpg',
       id: 'a4e',
     },
+    {
+      url: 'https://firebasestorage.googleapis.com/v0/b/catmashtest.appspot.com/o/photo_2019-03-26_15-44-00.jpg?alt=media&token=34fb1e36-6afa-4b52-b4a6-c720f536219e',
+      id: 'suzy',
+    },
+    {
+      url: 'https://firebasestorage.googleapis.com/v0/b/catmashtest.appspot.com/o/photo_2019-03-26_15-44-29.jpg?alt=media&token=94188e31-4407-47ee-8378-f568ee851795',
+      id: 'giselle',
+    },
   ],
 };
 
