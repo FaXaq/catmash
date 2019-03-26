@@ -29,6 +29,8 @@ export default class Leadboard extends Vue {
     return this.cats.sort((a: ICat, b: ICat) => {
       if ((a.score || 0) < (b.score || 0)) {
         return 1;
+      } else if (a.score === b.score && a.id < b.id) {
+        return 1;
       }
       return -1;
     });
