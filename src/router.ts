@@ -14,6 +14,6 @@ export default new Router({
       path: '/leadboard',
       name: 'leadboard',
       component: () => import('./views/Leadboard.vue'),
-    }
+    },
   ],
 });

@@ -22,7 +22,7 @@ import { ICat, CatModel } from '@/models/Cat';
 @Component({
   components: {
     CatProfile,
-  }
+  },
 })
 export default class Home extends Vue {
   private cats: ICat[] = [...getCats()];
@@ -33,41 +33,41 @@ export default class Home extends Vue {
   }
 
   // get a random cat index
-  getRandomCatIndex(): number {
+  public getRandomCatIndex(): number {
     return Math.floor(Math.random() * (this.cats.length));
   }
 
   // select to random cat for a versus
-  selectVersus() {
+  public selectVersus() {
     if (this.cats.length < 2) {
       alert('Not enough cats to play the catmash !');
     }
 
     // clean previous versus
     this.cleanVersus();
-    
+
     // select two random cats index
-    let randomCat1 = this.getRandomCatIndex(),
-        randomCat2 = this.getRandomCatIndex();
+    const randomCat1 = this.getRandomCatIndex();
+    let randomCat2 = this.getRandomCatIndex();
 
     // hack to prevent choosing between the same cat
-    while (randomCat2 == randomCat1) {
+    while (randomCat2 === randomCat1) {
       randomCat2 = this.getRandomCatIndex();
     }
-    
+
     // apply versus prop to them
     Vue.set(this.cats, randomCat1, Object.assign({}, this.cats[randomCat1], { versus: true }));
     Vue.set(this.cats, randomCat2, Object.assign({}, this.cats[randomCat2], { versus: true }));
   }
 
   // select winner, add it to firebase and launch a new versus !
-  selectWinner(id: string) {
+  public selectWinner(id: string) {
     CatModel.push(id);
     this.selectVersus();
   }
 
   // clean versus prop on cats
-  cleanVersus() {
+  public cleanVersus() {
     this.versusCats.forEach((c) => {
       Vue.delete(c, 'versus');
     });
@@ -76,14 +76,14 @@ export default class Home extends Vue {
   // clean scores if needed (when going back from leadboard)
   // this is pretty ugly
   // TODO: find a better way
-  clearScores() {
+  public clearScores() {
     this.cats.forEach((c) => {
       delete c.score;
-    })
+    });
   }
 
   // before mounting clear scores & select a new versus between cats
-  created() {
+  public created() {
     this.clearScores();
     this.selectVersus();
   }

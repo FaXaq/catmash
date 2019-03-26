@@ -14,14 +14,14 @@ import { bg } from '@/directives/bg';
 
 @Component({
   directives: {
-    bg
-  }
+    bg,
+  },
 })
 export default class CatProfile extends Vue {
   @Prop({
-    required: true
+    required: true,
   })
-  cat!: ICat;
+  public cat!: ICat;
 }
 </script>
 
