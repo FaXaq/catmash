@@ -14,6 +14,14 @@
       flex-direction: row;
     }
 
+    #logo {
+      @media screen and (min-width: $breakpoint-l) {
+        width: $base-unit * 10;
+        right: initial;
+        left: calc(50% - #{$base-unit * 5});
+      }
+    }
+
     > .pan {
       flex-grow: 1;
       display: flex;
