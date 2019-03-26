@@ -4,15 +4,20 @@
   line-height: $base-unit;
   display: block;
   position: fixed;
-  bottom: - $base-unit * 2;
-  left: calc(50% - #{$base-unit * 5});
+  bottom: - $base-unit * 3;
+  right: $base-unit;
+
+  @media screen and (min-width: $breakpoint-l) {
+    right: initial;
+    left: calc(50% - #{$base-unit * 4});
+  }
 
   text-decoration: none;
   color: $main-cta;
   background-color: white;
   border-radius: $base-unit;
-  width: $base-unit * 10;
-  padding: ($base-unit * 2) 0px ($base-unit * 3);
+  width: $base-unit * 8;
+  padding: ($base-unit * 1.5) 0px ($base-unit * 4);
   text-align: center;
   font-weight: bold;
 

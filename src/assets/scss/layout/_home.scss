@@ -10,7 +10,7 @@
     height: 100%;
     width: 100%;
 
-    @media screen and (min-width: 762px) {
+    @media screen and (min-width: $breakpoint-l) {
       flex-direction: row;
     }
 
@@ -23,13 +23,18 @@
       transition: flex-grow .3s;
 
       &:hover {
-        flex-grow: 2;
+        .cat .cat-img {
+          transform: translateY(-1px);
+          box-shadow: 0px ($base-unit / 3) 20px rgba(0,0,0,0.4);
+        }
       }
 
       .cat {
+        animation: .3s linear a-fade-in;
         display: flex;
         flex-direction: column;
         justify-content: center;
+        align-items: center;
         text-align: center;
         font-size: 2em;
       }
@@ -40,4 +45,9 @@
     background-color: $main-blue;
     color: white;
   }
+}
+
+@keyframes a-fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
 }

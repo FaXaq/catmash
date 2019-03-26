@@ -36,6 +36,7 @@ export default class CatProfile extends Vue {
     height: 20vh;
     background-size: cover;
     background-position: center center;
+    transition: all 0.3s;
 
     box-shadow: 0px 4px 20px rgba(0,0,0,0.3);
   }

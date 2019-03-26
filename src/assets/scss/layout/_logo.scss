@@ -1,9 +1,15 @@
 #logo {
   position: fixed;
-  width: $base-unit * 10;
+  width: $base-unit * 4;
+
+  @media screen and (min-width: $breakpoint-l) {
+    width: $base-unit * 10;
+    right: initial;
+    left: calc(50% - #{$base-unit * 5});
+  }
 
   top: 0px;
-  left: calc(50% - #{$base-unit * 5});
+  right: $base-unit;
 
   fill: blue;
 }
